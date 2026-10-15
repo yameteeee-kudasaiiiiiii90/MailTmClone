@@ -11,8 +11,8 @@ android {
         applicationId = "com.example.mailtmclone"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "2.0.0"
     }
 
     buildTypes {
@@ -53,12 +53,13 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material:material-icons-extended")
 
     // Retrofit & Gson
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
-    // WorkManager
+    // WorkManager for Background Sync
     implementation("androidx.work:work-runtime-ktx:2.9.0")
 }

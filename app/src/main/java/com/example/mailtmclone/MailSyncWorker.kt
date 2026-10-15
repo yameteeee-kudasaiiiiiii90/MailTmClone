@@ -47,7 +47,7 @@ class MailSyncWorker(
                         messageId = msg.id,
                         sender = senderName,
                         subject = msg.subject,
-                        intro = msg.intro
+                        intro = msg.intro ?: ""
                     )
                     sessionManager.markMessageAsNotified(msg.id)
                 }

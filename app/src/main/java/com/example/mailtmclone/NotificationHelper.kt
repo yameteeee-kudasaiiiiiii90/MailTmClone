@@ -26,10 +26,10 @@ class NotificationHelper(private val context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
-                "رسائل البريد المؤقت",
+                "Mail.tm Inbox Notifications",
                 NotificationManager.IMPORTANCE_HIGH
             ).apply {
-                description = "إشعارات فورية عند وصول رسائل جديدة إلى صندوق الوارد"
+                description = "Instant alerts when new emails arrive in your temporary inbox"
             }
             val manager = context.getSystemService(NotificationManager::class.java)
             manager.createNotificationChannel(channel)
@@ -55,11 +55,12 @@ class NotificationHelper(private val context: Context) {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
+        val cleanSubject = subject.ifBlank { "(No Subject)" }
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(android.R.drawable.ic_dialog_email)
-            .setContentTitle("رسالة جديدة من: $sender")
-            .setContentText(subject.ifBlank { "(بدون عنوان)" })
-            .setStyle(NotificationCompat.BigTextStyle().bigText("$subject\n$intro"))
+            .setContentTitle("New Email from $sender")
+            .setContentText(cleanSubject)
+            .setStyle(NotificationCompat.BigTextStyle().bigText("$cleanSubject\n$intro"))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
